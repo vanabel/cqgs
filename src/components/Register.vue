@@ -1,0 +1,102 @@
+<template>
+  <div>
+    <h4>Register</h4>
+    <form @submit.prevent='register'>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="name">Name:</label>
+        <div class="col-sm-5">
+          <input id='name' class='form-control' type='text' v-model='name' required autofocus>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for='email'>email:</label>
+        <div class="col-sm-5">
+          <input id='email' class='form-control' type='email' v-model='email' required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for='password'>password:</label>
+        <div class="col-sm-5">
+          <input id='password' class='form-control' type='password' v-model='password' required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for='password-confirm'>Confirm Password:</label>
+        <div class="col-sm-5">
+          <input id='password-confirm' class='form-control' type='password' v-model='password_confirmation' required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input col-sm-offset-2" type="checkbox" id="admin" v-model='is_admin'>
+          <label class="form-check-label col-sm-offset-2" for="admin">
+            Is this an administrator account?
+          </label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-5">
+          <button type='submit' class='btn btn-primary'>Register</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
+<script>
+export default {
+  data () {
+    return {
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: '',
+      is_admin: null
+    }
+  },
+  methods: {
+    register: function (e) {
+      /* let data = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        is_admin: this.is_admin
+      }
+      this.$store.dispatch('register', data)
+        .then(() => this.$router.push('/'))
+        .catch(err => console.log(err))
+    }
+    */
+      e.preventDefault()
+      if (this.password === this.password_confirmation && this.password.length > 0) {
+        let url = process.env.baseURL + '/register'
+        if (this.is_admin != null || this.is_admin === 1) {
+          url = process.env.baseURL + '/register-admin'
+        }
+        this.$http.post(url, {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          is_admin: this.is_admin
+        }).then(response => {
+          localStorage.setItem('user', JSON.stringify(response.data.user))
+          localStorage.setItem('jwt', response.data.token)
+          if (localStorage.getItem('jwt') != null) {
+            this.$emit('loggedIn')
+            if (this.$route.params.nextUrl != null) {
+              this.$router.push(this.$route.params.nextUrl)
+            } else {
+              this.$router.push('/')
+            }
+          }
+        }).catch(err => {
+          console.error(err)
+        })
+      } else {
+        this.password = ''
+        this.passwordConfirm = ''
+        return alert('Passwords do not match')
+      }
+    }
+  }
+}
+</script>
