@@ -12,7 +12,7 @@ class Db {
       id integer PRIMARY KEY,
       name text,
       email text UNIQUE,
-      user_pass text,
+      password text,
       is_admin integer)`
     return this.db.run(sql)
   }
@@ -25,7 +25,7 @@ class Db {
   }
   insertAdmin (user, callback) {
     return this.db.run(
-      'INSERT INTO user(name, email, user_pass, is_admin) VALUES (?, ?, ?, ?)',
+      'INSERT INTO user(name, email, password, is_admin) VALUES (?, ?, ?, ?)',
       user, (err) => {
         callback(err)
       })
@@ -37,7 +37,7 @@ class Db {
   }
   insert (user, callback) {
     return this.db.run(
-      'INSERT INTO user (name, email, user_pass) VALUES (?, ?, ?)',
+      'INSERT INTO user (name, email, password) VALUES (?, ?, ?)',
       user, (err) => {
         callback(err)
       })

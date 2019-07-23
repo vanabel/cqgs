@@ -1,3 +1,4 @@
+// ./server/config.js
 module.exports = {
-  'secret': 'supersecret'
+  'secret': 'applicationsecret'
 }

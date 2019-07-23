@@ -1,3 +1,4 @@
+// ./server/app.js
 'use strict'
 const express = require('express')
 const DB = require('./db')
@@ -17,10 +18,9 @@ router.use(bodyParser.json())
 const allowCrossDomain = function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', '*')
-  res.header('Access-Control-Allow-Headers', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie');
   next()
 }
-
 app.use(allowCrossDomain)
 
 router.post('/register', function (req, res) {
@@ -33,7 +33,8 @@ router.post('/register', function (req, res) {
     if (err) return res.status(500).send('There was a poblem registering the user.')
     db.selectByEmail(req.body.email, (err, user) => {
       if (err) return res.status(500).send('There was a poblem getting user.')
-      let token = jwt.sign({ id: user.id }, config.secret, { expiresIn: 86400 // expires in 1day
+      let token = jwt.sign({ id: user.id }, config.secret, { 
+        expiresIn: 86400 // expires in 1day
       })
       res.status(200).send({ auth: true, token: token, user: user })
     })
@@ -62,16 +63,16 @@ router.post('/login', (req, res) => {
   db.selectByEmail(req.body.email, (err, user) => {
     if (err) return res.status(500).send('Error on the server.')
     if (!user) return res.status(404).send('No user found.')
-    let passwordIsValid = bcrypt.compareSync(req.body.password, user.user_pass)
+    let passwordIsValid = bcrypt.compareSync(req.body.password, user.password)
     if (!passwordIsValid) return res.status(401).send({ auth: false, token: null })
-    let token = jwt.sign({ id: user.id }, config.secret, { expiresIn: 86400 // expires in 1day
+    let token = jwt.sign({ id: user.id }, config.secret, {
+      expiresIn: 86400 // expires in 1day
     })
     res.status(200).send({ auth: true, token: token, user: user })
   })
 })
 
 app.use(router)
-
 let port = process.env.PORT || 3000
 app.listen(port, function () {
   console.log('Express server listening on port ' + port)

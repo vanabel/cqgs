@@ -1,10 +1,11 @@
+// ./src/components/auth/Login.vue
 <template>
   <div class="container">
     <h1>Sign in</h1>
     <div class="centered">
       <form class='login' @submit.prevent='login'>
         <div class="form-group row">
-          <label for='email' class="col-sm-2 col-form-label col-form-label-sm">Email:</label>
+          <label for='email' class="col-sm-2 col-form-label col-form-label-sm">Name:</label>
           <div class="col-sm-5">
             <input v-model='email' type='email' palceholder='user@mail.com.cn' class="form-control form-control-sm" id="email" required>
           </div>
@@ -28,16 +29,18 @@
 export default {
   data () {
     return {
-      email: '',
-      password: ''
+      // remove in production
+      email: 'test@gmail.com',
+      password: 'test'
     }
   },
   methods: {
     login: function () {
       let email = this.email
       let password = this.password
-      this.$store.dispatch('login', { email, password })
-        .then(() => this.$router.push('/'))
+      let user = { email, password }
+      this.$store.dispatch('login', user)
+        .then(() => this.$router.push('/dashboard'))
         .catch(err => console.log(err))
     }
   }
