@@ -69,15 +69,15 @@ export default {
   data () {
     return {
       'userid': this.$route.params.id,
-      'title': 'The sphere theorem in Riemannian geometry',
-      'date': '2019-09-11',
-      'time': '15:00 -- 17:00',
-      'venue': '25102',
-      'speaker': 'Thomas, Yu',
-      'affiliation': 'University of Chicago',
-      'host': 'Wanjun, Ai',
-      'abst': 'We will give a proof of the sphere theorem in Riemannian Geometry, which states that if $M$ is a complete, simply-connected n-dimensional manifold with sectional curvature $K_M$ such that $1/4< K_M\\leq 1$, then $M$ is homeomorphic to the n-sphere $S^n$.',
-      'supp': 'http://math.uchicago.edu/~may/REU2013/REUPapers/Yu.pdf'
+      'title': '',
+      'date': '',
+      'time': '',
+      'venue': '',
+      'speaker': '',
+      'affiliation': '',
+      'host': '',
+      'abst': '',
+      'supp': ''
     }
   },
   methods: {

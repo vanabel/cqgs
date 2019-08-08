@@ -5,15 +5,15 @@
     <div class="centered">
       <form class='login' @submit.prevent='login'>
         <div class="form-group row">
-          <label for='email' class="col-sm-2 col-form-label col-form-label-sm">Name:</label>
+          <label for='email' class="col-sm-2 col-form-label col-form-label-sm">Email:</label>
           <div class="col-sm-5">
-            <input v-model='email' type='email' palceholder='user@mail.com.cn' class="form-control form-control-sm" id="email" required>
+            <input v-model='email' type='email' placeholder='test@gmail.com' class="form-control form-control-sm" id="email" required>
           </div>
         </div>
         <div class="form-group row">
           <label for='password' class="col-sm-2 col-form-label col-form-label-sm">Password:</label>
           <div class="col-sm-5">
-            <input type='password' v-model='password' placeholder='Password' id="password" class="form-control form-control-sm" required>
+            <input type='password' v-model='password' placeholder='test' id="password" class="form-control form-control-sm" required>
           </div>
         </div>
         <div class="form-group row">
@@ -30,8 +30,8 @@ export default {
   data () {
     return {
       // remove in production
-      email: 'test@gmail.com',
-      password: 'test'
+      email: '',
+      password: ''
     }
   },
   computed: {

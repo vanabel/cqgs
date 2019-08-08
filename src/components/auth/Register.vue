@@ -6,34 +6,39 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="name">Name:</label>
         <div class="col-sm-5">
-          <input id='name' class='form-control' type='text' v-model='name' required autofocus>
+          <input id='name' class='form-control' type='text' v-model='name' placeholder="test" required autofocus>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label" for='email'>email:</label>
         <div class="col-sm-5">
-          <input id='email' class='form-control' type='email' v-model='email' required>
+          <input id='email' class='form-control' type='email' placeholder="test@gmail.com" v-model='email' required>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label" for='password'>password:</label>
         <div class="col-sm-5">
-          <input id='password' class='form-control' type='password' v-model='password' required>
+          <input id='password' class='form-control' type='password' placeholder="test" v-model='password' required>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label" for='password-confirm'>Confirm Password:</label>
         <div class="col-sm-5">
-          <input id='password-confirm' class='form-control' type='password' v-model='password_confirmation' required>
+          <input id='password-confirm' class='form-control' type='password' placeholder="test" v-model='password_confirmation' required>
         </div>
       </div>
       <div class="form-group">
         <div class="form-check">
-          <input class="form-check-input col-sm-offset-2" type="checkbox" id="admin" v-model='is_admin'>
+          <input class="form-check-input" type="checkbox" id="admin" v-model='is_admin'>
           <label class="form-check-label col-sm-offset-2" for="admin">
             Is this an administrator account?
           </label>
         </div>
+      </div>
+      <div class="form-group row">
+        <label class="form-check-label col-sm-2" for="recaptcha">
+        </label>
+        <div class="col-sm-5 col-sm-offset-2 g-recaptcha" data-sitekey="6LfE8rEUAAAAABgavSMTMqa-Humu-i3CPMHmxSbO"></div>
       </div>
       <div class="form-group row">
         <div class="col-sm-5">
@@ -47,10 +52,10 @@
 export default {
   data () {
     return {
-      name: 'test',
-      email: 'test@gmail.com',
-      password: 'test',
-      password_confirmation: 'test',
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: '',
       is_admin: null
     }
   },
