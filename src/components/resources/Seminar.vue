@@ -1,9 +1,8 @@
-// ./src/components/resources/Dashboard.vue
 <template>
   <div>
-    <h1>List of the seminars</h1>
+    <h1>{{ msg }}</h1>
     <ol class="list-group">
-      <li v-for="item in posts" :key="item.key" class="list-group-item border-0 item">
+      <li v-for="item in data" :key="item.key" class="list-group-item border-0 item">
         <table class="table table-borderless">
           <thead>
             <th scope="col" class="twidth"></th>
@@ -17,18 +16,13 @@
               <td></td>
             </tr>
             <tr>
-              <td class="align-middle text-left">{{ item.time}}</td>
+              <td rowspan=2 class="align-middle text-left">{{ item.time}}</td>
               <td class="text-left"><span class="strong">Venue: </span>{{ item.venue}}</td>
               <td class="text-left"><span class="strong">Speaker: </span>{{ item.speaker}}</td>
             </tr>
             <tr>
-              <td class="align-middle text-left">
-                <!-- <router-link :to="{ name: 'edit', params: { id: item.id } }" class="del">Edit</router-link> -->
-                <button v-on:click.prevent="edit(item.id)" class="btn btn-link del">Edit</button>
-                /
-                <button v-on:click="del(item.id)" class="btn btn-link del">Delete</button>
-                <td class="text-left"><span class="strong">Affiliation: </span>{{ item.affiliation}}</td>
-                <td class="text-left"><span class="strong">Host: </span>{{ item.host}}</td>
+              <td class="text-left"><span class="strong">Affiliation: </span>{{ item.affiliation}}</td>
+              <td class="text-left"><span class="strong">Host: </span>{{ item.host}}</td>
             </tr>
             <tr :id="'accordion'+item.id" class="accordian-body collapse">
               <td></td>
@@ -58,54 +52,15 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 import Autolinker from 'autolinker'
 import 'katex/dist/katex.min.css'
-
 export default {
-  data () {
-    return {
-      'userid': this.$route.params.id,
-      posts: [],
-      'baseURL': process.env.VUE_APP_baseSURL
-    }
-  },
-  created () {
-    axios({
-      url: this.baseURL + '/getall',
-      data: {
-        userid: this.userid
-      },
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(resp => {
-      // console.log(resp.data)
-      this.posts = resp.data
-    })
+  name: 'Seminar',
+  props: {
+    msg: String,
+    data: Array
   },
   methods: {
-    del: function (id) {
-      axios({
-        url: this.baseURL + '/del',
-        data: {
-          id: id
-        },
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(resp => {
-        // console.log(resp.data)
-        location.reload()
-      }).catch((err) => {
-        console.log(err)
-      })
-    },
-    edit: function (itemId) {
-      this.$router.replace({ name: 'edit', params: { id: itemId } })
-    },
     autoLinker: function (linkedText) {
       return Autolinker.link(linkedText, { newWindow: true })
     },
@@ -122,7 +77,21 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
+<style scoped lang="less">
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
 .title {
   font-size: 1.5rem;
 }
@@ -139,12 +108,5 @@ export default {
 }
 .twidth {
   min-width: 8rem;
-}
-.pagination {
-  text-align: center;
-}
-.del {
-  margin: 0;
-  padding: 0;
 }
 </style>

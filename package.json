@@ -7,18 +7,24 @@
     "url": "https://github.com/vanabel/cqgs.git"
   },
   "scripts": {
-    "serve": "node server/app",
-    "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "nodemon server/app --inspect --mode development",
+    "dev": "vue-cli-service serve --mode development",
+    "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "autolinker": "^3.11.0",
+    "aws-sdk": "^2.499.0",
     "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
     "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
+    "katex": "^0.10.2",
+    "markdown-it": "^9.0.1",
+    "markdown-it-texmath": "^0.5.5",
+    "moment": "^2.24.0",
     "popper.js": "^1.15.0",
     "sqlite3": "^4.0.9",
     "vue": "^2.6.10",
@@ -26,15 +32,16 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.9.0",
-    "@vue/cli-plugin-eslint": "^3.9.0",
-    "@vue/cli-service": "^3.9.0",
+    "@vue/cli-plugin-babel": "^3.10.0",
+    "@vue/cli-plugin-eslint": "^3.10.0",
+    "@vue/cli-service": "^3.10.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "nodemon": "^1.19.1",
     "npm-cache": "^0.7.0",
     "vue-template-compiler": "^2.6.10"
   }

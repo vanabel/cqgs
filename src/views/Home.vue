@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Home msg="Welcome the Geometric Seminar in ChongQing"/>
+    <Home msg="Welcome to the Geometric Seminar in Chongqing"/>
   </div>
 </template>
 

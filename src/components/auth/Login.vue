@@ -34,13 +34,17 @@ export default {
       password: 'test'
     }
   },
+  computed: {
+    getUserId: function () {
+      return this.$store.getters.authUserId
+    }
+  },
   methods: {
     login: function () {
       let email = this.email
       let password = this.password
-      let user = { email, password }
-      this.$store.dispatch('login', user)
-        .then(() => this.$router.push('/dashboard'))
+      this.$store.dispatch('login', { email, password })
+        .then(() => this.$router.push({ name: 'dashboard', params: { id: this.getUserId } }))
         .catch(err => console.log(err))
     }
   }

@@ -5,8 +5,11 @@ import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Login from '@/components/auth/Login.vue'
 import Register from '@/components/auth/Register.vue'
-// import Admin from '@components/auth/Admin.vue'
-import Secure from '@/components/resources/Dashboard.vue'
+import Dashboard from '@/components/resources/Dashboard.vue'
+import Admin from '@/components/auth/Admin.vue'
+import Add from '@/components/admin/Add.vue'
+import Edit from '@/components/admin/Edit.vue'
+import Search from '@/components/resources/Search.vue'
 
 Vue.use(Router)
 
@@ -30,33 +33,40 @@ let router = new Router({
       component: Register
     },
     {
-      path: '/dashboard',
+      path: '/:id/dashboard',
       name: 'dashboard',
-      component: Secure,
+      component: Dashboard,
       meta: {
         requiresAuth: true
       }
     },
-    // {
-    //   path: '/admin',
-    //   name: 'admin',
-    //   component: Admin,
-    //   children: [
-    //     {
-    //       path: 'add',
-    //       name: 'add',
-    //       component: Add
-    //     },
-    //     {
-    //       path: 'del',
-    //       name: 'del',
-    //       component: Del
-    //     }
-    //   ],
-    //   meta: {
-    //     requiresAuth: true
-    //   }
-    // },
+    {
+      path: '/search?q=:query',
+      name: 'search',
+      component: Search
+    },
+    {
+      path: '/admin',
+      component: Admin,
+      children: [
+        { path: ':id/dashboard',
+          component: Dashboard
+        },
+        {
+          path: ':id/add',
+          name: 'add',
+          component: Add
+        },
+        {
+          path: 'edit/:id',
+          name: 'edit',
+          component: Edit
+        }
+      ],
+      meta: {
+        requiresAuth: true
+      }
+    },
     {
       path: '/about',
       name: 'about',
