@@ -1,0 +1,37 @@
+<!--index.wxml-->
+<view class="container">
+  <view wx:for="{{ seminarLists }}" wx:key="item.{{ index }}" wx:for-index="idx" wx:for-item="obj" class="seminar">
+    <view class="titledate">
+      <view class="title">
+        {{ obj.title }}
+      </view>
+      <view class="date">
+        <view>
+          {{ obj.date }}
+        </view>
+        <view>
+          {{ obj.time }}
+        </view>
+      </view>
+    </view>
+    <view class="info">
+      <view class="left">
+        Affiliation: {{ obj.affiliation }}
+      </view>
+      <view class="right">
+        Speaker: {{ obj.speaker }}
+      </view>
+    </view>
+    <view class="info">
+      <view class="left">
+        Venue: {{ obj.venue }}
+      </view>
+      <view class="right">
+        Host: {{ obj.host }}
+      </view>
+    </view>
+    <view class="abst">
+      Abstract: {{ obj.abst }}
+    </view>
+  </view>
+</view>

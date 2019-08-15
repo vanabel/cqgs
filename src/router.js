@@ -2,14 +2,22 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store.js'
 import Home from '@/views/Home.vue'
-import About from '@/views/About.vue'
-import Login from '@/components/auth/Login.vue'
-import Register from '@/components/auth/Register.vue'
-import Dashboard from '@/components/resources/Dashboard.vue'
-import Admin from '@/components/auth/Admin.vue'
-import Add from '@/components/admin/Add.vue'
-import Edit from '@/components/admin/Edit.vue'
-import Search from '@/components/resources/Search.vue'
+// import About from '@/views/About.vue'
+const About = () => import(/* webpackChunkName: "about" */ './views/About.vue')
+// import Login from '@/components/auth/Login.vue'
+const Login = () => import(/* webpackChunkName: "auth" */ './components/auth/Login.vue')
+// import Register from '@/components/auth/Register.vue'
+const Register = () => import(/* webpackChunkName: "auth" */ './components/auth/Register.vue')
+// import Dashboard from '@/components/resources/Dashboard.vue'
+const Dashboard = () => import(/* webpackChunkName: "dashboard" */ './components/resources/Dashboard.vue')
+// import Admin from '@/components/auth/Admin.vue'
+const Admin = () => import(/* webpackChunkName: "admin" */ './components/auth/Admin.vue')
+// import Add from '@/components/admin/Add.vue'
+const Add = () => import(/* webpackChunkName: "add" */ './components/admin/Add.vue')
+// import Edit from '@/components/admin/Edit.vue'
+const Edit = () => import(/* webpackChunkName: "add" */ './components/admin/Edit.vue')
+// import Search from '@/components/resources/Search.vue'
+const Search = () => import(/* webpackChunkName: "search" */ './components/resources/Search.vue')
 
 Vue.use(Router)
 
@@ -47,6 +55,7 @@ let router = new Router({
     },
     {
       path: '/admin',
+      // component: Admin,
       component: Admin,
       children: [
         { path: ':id/dashboard',
@@ -70,10 +79,6 @@ let router = new Router({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
       component: About
     }
   ]

@@ -10,6 +10,7 @@
     "serve": "nodemon server/app --inspect --mode development",
     "dev": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build --mode production",
+    "analyz": "NODE_ENV=production npm_config_report=true npm run build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
