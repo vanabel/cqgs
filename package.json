@@ -20,7 +20,7 @@
     "bcrypt": "^3.0.6",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
     "katex": "^0.10.2",
     "markdown-it": "^9.0.1",
